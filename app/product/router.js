@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Product = require('./model')
 
 router.post('/product', async (req, res) => {
+    console.log("masuk", req);
     const {users_id, name, price, stock, status} = req.body 
     try {
         await Product.sync();
@@ -11,6 +12,15 @@ router.post('/product', async (req, res) => {
         res.send(e);
     }
     
+})
+
+router.get('/product', async (req, res) => {
+    try {
+        let result = await Product.findAll()
+        res.send(result)
+    } catch(e) {
+        res.send(e)
+    }
 })
 
 module.exports = router
